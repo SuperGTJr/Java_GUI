@@ -48,8 +48,9 @@ public class MyDrawing
 		this.lineWidth = lineWidth;
 	}
 	
-	public void setLineStyle() {
+	public void setLineStyle(int lineStyle) {
 		//オブジェクトの線の種類を変更する処理を書く
+		this.lineStyle = lineStyle;
 	}
 	
 	public int getX() {
