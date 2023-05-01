@@ -1,4 +1,5 @@
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -8,6 +9,11 @@ public class MyHendecagonal extends MyDrawing
 		super();
 		setLocation(xpt, ypt);
 		setSize(rpt, rpt);
+	}
+	
+	public MyHendecagonal(int xpt, int ypt, int rpt, Color lc, Color fc) {
+		this(xpt, ypt, rpt);
+		setColor(lc, fc);
 	}
 	
 	private int numV = 11;

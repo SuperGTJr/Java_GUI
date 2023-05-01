@@ -1,12 +1,19 @@
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class MyRectangle extends MyDrawing
 {
-	public MyRectangle(int xpt, int ypt) {
+	public MyRectangle(int xpt, int ypt, int wpt, int hpt) {
 		super();
 		setLocation(xpt, ypt);
+		setSize(wpt, hpt);
+	}
+	
+	public MyRectangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
+		this(xpt, ypt, wpt, hpt);
+		setColor(lc, fc);
 	}
 	
 	public void draw(Graphics g) {

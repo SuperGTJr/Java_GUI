@@ -1,4 +1,5 @@
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -8,6 +9,11 @@ public class MyOval extends MyDrawing
 		super();
 		setLocation(xpt, ypt);
 		setSize(wpt, hpt);
+	}
+	
+	public MyOval(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
+		this(xpt, ypt, wpt, hpt);
+		setColor(lc, fc);
 	}
 	
 	public void draw(Graphics g) {
