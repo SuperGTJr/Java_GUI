@@ -6,6 +6,7 @@ public class MyDrawing
 	private int x, y, w, h; //X座標 Y座標 幅 高さ
 	private Color lineColor, fillColor; //線の色 塗りの色
 	private int lineWidth; //線の太さ
+	private int lineStyle; //線の種類(仮にint型としておく)
 	
 	public MyDrawing() {
 		 x = y = 0;
@@ -13,6 +14,7 @@ public class MyDrawing
 		 lineColor = Color.black;
 		 fillColor = Color.white;
 		 lineWidth = 1;
+		 lineStyle = 1;
 	}
 	
 	public void draw(Graphics g) {
@@ -44,6 +46,10 @@ public class MyDrawing
 	public void setWidth(int lineWidth) {
 		//オブジェクトの線の太さを変更する処理を書く
 		this.lineWidth = lineWidth;
+	}
+	
+	public void setLineStyle() {
+		//オブジェクトの線の種類を変更する処理を書く
 	}
 	
 	public int getX() {
@@ -79,5 +85,10 @@ public class MyDrawing
 	public int getLineWidth() {
 		//オブジェクトの線の太さを取得する処理を書く
 		return lineWidth;
+	}
+	
+	public int getLineStyle() {
+		//オブジェクトの線の太さを取得する処理を書く
+		return lineStyle;
 	}
 }
