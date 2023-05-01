@@ -16,9 +16,9 @@ public class MyApplication extends JFrame
 		this.getContentPane().add(jp);
 		
 		MyCanvas canvas = new MyCanvas();
-		for(int i=0; i<8; i++) {
-			canvas.addDrawing(new MyHendecagonal(30+i*40, 20+i*30, 69));
-		}
+		canvas.addDrawing(new MyOval(25, 20, 60, 60));
+		canvas.addDrawing(new MyHendecagonal(150, 50, 30));
+		canvas.addDrawing(new MyTriangle(240, 50, 30));
 		jp.add(BorderLayout.CENTER, canvas);
 		
 		//WindowEvent リスナを設定(無名クラスを利用している)
