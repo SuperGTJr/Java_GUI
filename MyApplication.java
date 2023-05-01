@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -16,9 +17,10 @@ public class MyApplication extends JFrame
 		this.getContentPane().add(jp);
 		
 		MyCanvas canvas = new MyCanvas();
-		canvas.addDrawing(new MyOval(25, 20, 60, 60));
-		canvas.addDrawing(new MyHendecagonal(150, 50, 30));
-		canvas.addDrawing(new MyTriangle(240, 50, 30));
+		canvas.addDrawing(new MyOval(25, 20, 60, 60, Color.black, Color.blue));
+		canvas.addDrawing(new MyHendecagonal(150, 50, 30, Color.black, Color.blue));
+		canvas.addDrawing(new MyTriangle(240, 50, 30, Color.black, Color.blue));
+		canvas.addDrawing(new MyRectangle(310, 25, 50, 50, Color.black, Color.blue));
 		jp.add(BorderLayout.CENTER, canvas);
 		
 		//WindowEvent リスナを設定(無名クラスを利用している)
