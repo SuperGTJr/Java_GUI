@@ -6,14 +6,15 @@ import java.awt.Graphics2D;
 public class MyRectangle extends MyDrawing
 {
 	public MyRectangle(int xpt, int ypt, int wpt, int hpt) {
-		super();
-		setLocation(xpt, ypt);
-		setSize(wpt, hpt);
+		super(xpt, ypt, wpt, hpt);
 	}
 	
 	public MyRectangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
-		this(xpt, ypt, wpt, hpt);
-		setColor(lc, fc);
+		super(xpt, ypt, wpt, hpt, lc, fc);
+	}
+	
+	public MyRectangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc, boolean b) {
+		super(xpt, ypt, wpt, hpt, lc, fc, b);
 	}
 	
 	public void draw(Graphics g) {
@@ -33,7 +34,14 @@ public class MyRectangle extends MyDrawing
 		}
 		
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(getLineWidth()));
+		
+		///破線か否かでストロークを変更
+		if(getDashed()) {
+			g2.setStroke(new MyDashStroke(getLineWidth()));
+		}else {
+			g2.setStroke(new BasicStroke(getLineWidth()));
+			
+		}
 		g2.setColor(getFillColor());
 		g2.fillRect(x, y, w, h);
 		g2.setColor(getLineColor());

@@ -6,7 +6,7 @@ public class MyDrawing
 	private int x, y, w, h; //X座標 Y座標 幅 高さ
 	private Color lineColor, fillColor; //線の色 塗りの色
 	private int lineWidth; //線の太さ
-	private int lineStyle; //線の種類(仮にint型としておく)
+	private boolean isDashed = false; //線の種類(仮にint型としておく)
 	
 	public MyDrawing() {
 		 x = y = 0;
@@ -14,7 +14,23 @@ public class MyDrawing
 		 lineColor = Color.black;
 		 fillColor = Color.white;
 		 lineWidth = 1;
-		 lineStyle = 1;
+	}
+	
+	public MyDrawing(int x, int y, int w, int h) {
+		setLocation(x, y);
+		setSize(w, h);
+		setColor(Color.black,Color.white);
+	}
+	
+	public MyDrawing(int x, int y, int w, int h, Color lc, Color fc) {
+		this(x, y, w, h);
+		setColor(lineColor, fillColor);
+	}
+	
+	public MyDrawing(int x, int y, int w, int h, Color lc, Color fc, boolean b) {
+		this(x, y, w, h);
+		setColor(lineColor, fillColor);
+		setDashed(b);
 	}
 	
 	public void draw(Graphics g) {
@@ -48,9 +64,9 @@ public class MyDrawing
 		this.lineWidth = lineWidth;
 	}
 	
-	public void setLineStyle(int lineStyle) {
+	public void setDashed(boolean b) {
 		//オブジェクトの線の種類を変更する処理を書く
-		this.lineStyle = lineStyle;
+		isDashed = b;
 	}
 	
 	public int getX() {
@@ -88,8 +104,8 @@ public class MyDrawing
 		return lineWidth;
 	}
 	
-	public int getLineStyle() {
+	public boolean getDashed() {
 		//オブジェクトの線の太さを取得する処理を書く
-		return lineStyle;
+		return isDashed;
 	}
 }

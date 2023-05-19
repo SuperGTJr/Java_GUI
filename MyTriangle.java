@@ -5,15 +5,16 @@ import java.awt.Graphics2D;
 
 public class MyTriangle extends MyDrawing
 {
-	public MyTriangle(int xpt, int ypt, int rpt) {
-		super();
-		setLocation(xpt, ypt);
-		setSize(rpt, rpt);
+	public MyTriangle(int xpt, int ypt, int wpt, int hpt) {
+		super(xpt, ypt, wpt, hpt);
 	}
 	
-	public MyTriangle(int xpt, int ypt, int rpt, Color lc, Color fc) {
-		this(xpt, ypt, rpt);
-		setColor(lc, fc);
+	public MyTriangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
+		super(xpt, ypt, wpt, hpt, lc, fc);
+	}
+	
+	public MyTriangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc, boolean b) {
+		super(xpt, ypt, wpt, hpt, lc, fc, b);
 	}
 	
 	private int numV = 3;
@@ -44,7 +45,12 @@ public class MyTriangle extends MyDrawing
 		
 		
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(getLineWidth()));
+		if(getDashed()) {
+			g2.setStroke(new MyDashStroke(getLineWidth()));
+		}else {
+			g2.setStroke(new BasicStroke(getLineWidth()));
+			
+		}
 		g2.setColor(getFillColor());
 		g2.fillPolygon(xpts, ypts, 3);
 		g2.setColor(getLineColor());

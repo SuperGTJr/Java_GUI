@@ -5,15 +5,18 @@ import java.awt.Graphics2D;
 
 public class MyOval extends MyDrawing
 {
+	//superクラスで定義してsuper()で呼び出して引数書くようにするともっと減らせるよ
+	
 	public MyOval(int xpt, int ypt, int wpt, int hpt) {
-		super();
-		setLocation(xpt, ypt);
-		setSize(wpt, hpt);
+		super(xpt, ypt, wpt, hpt);
 	}
 	
 	public MyOval(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
-		this(xpt, ypt, wpt, hpt);
-		setColor(lc, fc);
+		super(xpt, ypt, wpt, hpt, lc, fc);
+	}
+	
+	public MyOval(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc, boolean b) {
+		super(xpt, ypt, wpt, hpt, lc, fc, b);
 	}
 	
 	public void draw(Graphics g) {
@@ -33,7 +36,12 @@ public class MyOval extends MyDrawing
 		}
 		
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(getLineWidth()));
+		if(getDashed()) {
+			g2.setStroke(new MyDashStroke(getLineWidth()));
+		}else {
+			g2.setStroke(new BasicStroke(getLineWidth()));
+			
+		}
 		g2.setColor(getFillColor());
 		g2.fillOval(x, y, w, h);
 		g2.setColor(getLineColor());
