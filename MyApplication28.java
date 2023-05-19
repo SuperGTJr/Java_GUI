@@ -29,6 +29,8 @@ public class MyApplication28 extends JFrame{
 		jp.add(rectButton);
 		OvalButton ovalButton = new OvalButton(stateManager);
 		jp.add(ovalButton);
+		TriangleButton triangleButton = new TriangleButton(stateManager);
+		jp.add(triangleButton);
 		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(jp, BorderLayout.NORTH);
