@@ -19,7 +19,6 @@ public class StateManager
         state.mouseDown(x, y);
 	}
 	
-
 	public void mouseUp(int x, int y) {
 		state.mouseUp(x, y);
 	}
