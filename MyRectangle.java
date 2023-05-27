@@ -13,10 +13,6 @@ public class MyRectangle extends MyDrawing
 		super(xpt, ypt, wpt, hpt, lc, fc);
 	}
 	
-	public MyRectangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc, boolean b) {
-		super(xpt, ypt, wpt, hpt, lc, fc, b);
-	}
-	
 	public void draw(Graphics g) {
 		int x = getX();
 		int y = getY();
@@ -34,8 +30,11 @@ public class MyRectangle extends MyDrawing
 		}
 		
 		Graphics2D g2 = (Graphics2D) g;
-		
-		///破線か否かでストロークを変更
+		if(getShadowed()) {
+			g2.setColor(Color.black);
+			g2.fillRect(x+3, y+3, w, h);
+		}
+
 		if(getDashed()) {
 			g2.setStroke(new MyDashStroke(getLineWidth()));
 		}else {

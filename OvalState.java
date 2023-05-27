@@ -16,7 +16,6 @@ public class OvalState extends State{
 		int h = oval.getH();
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
 			stateManager.canvas.removeDrawing(oval);
-			System.out.println("removed");
 		}
 	}
 	
@@ -25,8 +24,11 @@ public class OvalState extends State{
 		int y0 = oval.getY();
 		int w = x - x0;
 		int h = y - y0;
+
 		stateManager.canvas.removeDrawing(oval);
 		oval = new MyOval(x0, y0, w, h);
+		oval.setDashed(stateManager.getDashed());
+		oval.setShadowed(stateManager.getShadowed());
 		stateManager.canvas.addDrawing(oval);
 	}
 }

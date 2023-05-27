@@ -6,15 +6,9 @@ public class MyDrawing
 	private int x, y, w, h; //X座標 Y座標 幅 高さ
 	private Color lineColor, fillColor; //線の色 塗りの色
 	private int lineWidth; //線の太さ
-	private boolean isDashed = false; //線の種類(仮にint型としておく)
+	private boolean isDashed = false; //線の種類
+	private boolean isShadowed = false; //ドロップシャドウ
 	
-	public MyDrawing() {
-		 x = y = 0;
-		 w = h = 40;
-		 lineColor = Color.black;
-		 fillColor = Color.white;
-		 lineWidth = 1;
-	}
 	
 	public MyDrawing(int x, int y, int w, int h) {
 		setLocation(x, y);
@@ -24,13 +18,7 @@ public class MyDrawing
 	
 	public MyDrawing(int x, int y, int w, int h, Color lc, Color fc) {
 		this(x, y, w, h);
-		setColor(lineColor, fillColor);
-	}
-	
-	public MyDrawing(int x, int y, int w, int h, Color lc, Color fc, boolean b) {
-		this(x, y, w, h);
-		setColor(lineColor, fillColor);
-		setDashed(b);
+		setColor(lc, fc);
 	}
 	
 	public void draw(Graphics g) {
@@ -69,6 +57,11 @@ public class MyDrawing
 		isDashed = b;
 	}
 	
+	public void setShadowed(boolean s) {
+		//ドロップシャドウの設定
+		isShadowed = s;
+	}
+	
 	public int getX() {
 		//オブジェクトのXの位置を取得する処理を書く
 		return x;
@@ -105,7 +98,12 @@ public class MyDrawing
 	}
 	
 	public boolean getDashed() {
-		//オブジェクトの線の太さを取得する処理を書く
+		//オブジェクトの線の種類を取得する処理を書く
 		return isDashed;
+	}
+	
+	public boolean getShadowed() {
+		//ドロップシャドウを行うか否か
+		return isShadowed;
 	}
 }

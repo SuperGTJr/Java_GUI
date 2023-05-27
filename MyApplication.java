@@ -34,6 +34,11 @@ public class MyApplication extends JFrame{
 		HendecagonalButton hendecagonalButton = new HendecagonalButton(stateManager);
 		jp.add(hendecagonalButton);
 		
+		DashCheck dashCheck = new DashCheck(stateManager);
+		jp.add(dashCheck);
+		ShadowCheck shadowCheck = new ShadowCheck(stateManager);
+		jp.add(shadowCheck);
+		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(jp, BorderLayout.NORTH);
 		getContentPane().add(canvas, BorderLayout.CENTER);
@@ -43,12 +48,10 @@ public class MyApplication extends JFrame{
 			public void mousePressed(MouseEvent e) {
 				stateManager.mouseDown(e.getX(), e.getY());
 				canvas.repaint();
-				System.out.println("Down Done");
 			}
 			public void mouseReleased(MouseEvent e) {
 				stateManager.mouseUp(e.getX(), e.getY());
 				canvas.repaint();
-				System.out.println("Up Done");
 			}
 		});
 		
@@ -56,7 +59,6 @@ public class MyApplication extends JFrame{
 			public void mouseDragged(MouseEvent e) {
 				stateManager.mouseDrag(e.getX(), e.getY());
 				canvas.repaint();
-				System.out.println("Drag Done");
 			}
 		});
 		

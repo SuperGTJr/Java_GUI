@@ -15,10 +15,6 @@ public class MyOval extends MyDrawing
 		super(xpt, ypt, wpt, hpt, lc, fc);
 	}
 	
-	public MyOval(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc, boolean b) {
-		super(xpt, ypt, wpt, hpt, lc, fc, b);
-	}
-	
 	public void draw(Graphics g) {
 		int x = getX();
 		int y = getY();
@@ -36,6 +32,11 @@ public class MyOval extends MyDrawing
 		}
 		
 		Graphics2D g2 = (Graphics2D) g;
+		if(getShadowed()) {
+			g2.setColor(Color.black);
+			g2.fillOval(x+3, y+3, w, h);
+		}
+		
 		if(getDashed()) {
 			g2.setStroke(new MyDashStroke(getLineWidth()));
 		}else {

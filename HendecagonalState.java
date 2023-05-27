@@ -16,7 +16,6 @@ public class HendecagonalState extends State{
 		int h = hendecagonal.getH();
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
 			stateManager.canvas.removeDrawing(hendecagonal);
-			System.out.println("removed");
 		}
 	}
 	
@@ -27,6 +26,8 @@ public class HendecagonalState extends State{
 		int h = y - y0;
 		stateManager.canvas.removeDrawing(hendecagonal);
 		hendecagonal = new MyHendecagonal(x0, y0, w, h);
+		hendecagonal.setDashed(stateManager.getDashed());
+		hendecagonal.setShadowed(stateManager.getShadowed());
 		stateManager.canvas.addDrawing(hendecagonal);
 	}
 }

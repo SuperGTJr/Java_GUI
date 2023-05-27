@@ -13,10 +13,6 @@ public class MyTriangle extends MyDrawing
 		super(xpt, ypt, wpt, hpt, lc, fc);
 	}
 	
-	public MyTriangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc, boolean b) {
-		super(xpt, ypt, wpt, hpt, lc, fc, b);
-	}
-	
 	private int numV = 3;
 	
 	public void draw(Graphics g) {
@@ -24,16 +20,6 @@ public class MyTriangle extends MyDrawing
 		int y = getY();
 		int w = getW();
 		int h = getH();
-		
-		//高さや横幅が負のときのための処理
-		if(w < 0) {
-			x += w;
-			w *= -1;
-		}
-		if(h < 0) {
-			y += h;
-			h *= -1;
-		}
 		
 		int[] xpts = new int[numV];
 		int[] ypts = new int[numV];
@@ -43,8 +29,18 @@ public class MyTriangle extends MyDrawing
 			ypts[i] = y + (int)(h * Math.sin(angle));
 		}
 		
-		
 		Graphics2D g2 = (Graphics2D) g;
+		if(getShadowed()) {
+			int[] sxpts = new int[numV];
+			int[] sypts = new int[numV];
+			for(int j=0; j<numV; j++) {
+				sxpts[j] = xpts[j] + 3;
+				sypts[j] = ypts[j] + 3;
+			}
+			g2.setColor(Color.black);
+			g2.fillPolygon(sxpts, sypts, numV);
+		}
+		
 		if(getDashed()) {
 			g2.setStroke(new MyDashStroke(getLineWidth()));
 		}else {
@@ -52,8 +48,8 @@ public class MyTriangle extends MyDrawing
 			
 		}
 		g2.setColor(getFillColor());
-		g2.fillPolygon(xpts, ypts, 3);
+		g2.fillPolygon(xpts, ypts, numV);
 		g2.setColor(getLineColor());
-		g2.drawPolygon(xpts, ypts, 3);
+		g2.drawPolygon(xpts, ypts, numV);
 	}
 }

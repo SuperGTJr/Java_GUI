@@ -16,7 +16,6 @@ public class TriangleState extends State{
 		int h = triangle.getH();
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
 			stateManager.canvas.removeDrawing(triangle);
-			System.out.println("removed");
 		}
 	}
 	
@@ -27,6 +26,8 @@ public class TriangleState extends State{
 		int h = y - y0;
 		stateManager.canvas.removeDrawing(triangle);
 		triangle = new MyTriangle(x0, y0, w, h);
+		triangle.setDashed(stateManager.getDashed());
+		triangle.setShadowed(stateManager.getShadowed());
 		stateManager.canvas.addDrawing(triangle);
 	}
 }

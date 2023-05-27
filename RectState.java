@@ -16,7 +16,6 @@ public class RectState extends State{
 		int h = rect.getH();
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
 			stateManager.canvas.removeDrawing(rect);
-			System.out.println("removed");
 		}
 	}
 	
@@ -27,6 +26,8 @@ public class RectState extends State{
 		int h = y - y0;
 		stateManager.canvas.removeDrawing(rect);
 		rect = new MyRectangle(x0, y0, w, h);
+		rect.setDashed(stateManager.getDashed());
+		rect.setShadowed(stateManager.getShadowed());
 		stateManager.canvas.addDrawing(rect);
 	}
 }
