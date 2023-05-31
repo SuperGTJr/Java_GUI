@@ -4,6 +4,9 @@ public class StateManager
 	MyCanvas canvas;
 	boolean dashed;
 	boolean shadowed;
+	float length;
+	float space;
+	int lines;
 	
 	
 	public StateManager(MyCanvas canvas) {
@@ -20,16 +23,40 @@ public class StateManager
 		this.dashed = dashed;
 	}
 	
-	public boolean getDashed() {
-		return dashed;
-	}
-	
 	public void setShadowed(boolean shadowed) {
 		this.shadowed = shadowed;
 	}
 	
+	public void setLength(float length) {
+		this.length = length;
+	}
+	
+	public void setSpace(float space) {
+		this.space = space;
+	}
+	
+	public void setLines(int lines) {
+		this.lines = lines;
+	}
+	
+	public boolean getDashed() {
+		return dashed;
+	}
+	
 	public boolean getShadowed(){
 		return shadowed;
+	}
+	
+	public float getLength() {
+		return length;
+	}
+	
+	public float getSpace(){
+		return space;
+	}
+	
+	public int getLines() {
+		return lines;
 	}
 	
 	public void mouseDown(int x, int y) {

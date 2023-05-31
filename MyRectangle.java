@@ -18,6 +18,7 @@ public class MyRectangle extends MyDrawing
 		int y = getY();
 		int w = getW();
 		int h = getH();
+		int l = getLines();
 		
 		//高さや横幅が負のときのための処理
 		if(w < 0) {
@@ -36,14 +37,25 @@ public class MyRectangle extends MyDrawing
 		}
 
 		if(getDashed()) {
+//			g2.setStroke(new MyDashStroke(getLineWidth(),getLength(), getSpace() ));
 			g2.setStroke(new MyDashStroke(getLineWidth()));
 		}else {
 			g2.setStroke(new BasicStroke(getLineWidth()));
 			
 		}
+		
+		
 		g2.setColor(getFillColor());
 		g2.fillRect(x, y, w, h);
 		g2.setColor(getLineColor());
-		g2.drawRect(x, y, w, h);
+		if (l > 1) {
+		    for (int i = 0; i < l; i++) {
+		        int move = i * 2;
+		        int shrink = i * 4;
+		        g2.drawRect(x + move, y + move, w - shrink, h - shrink);
+		    }
+		} else {
+		    g2.drawRect(x, y, w, h);
+		}
 	}
 }

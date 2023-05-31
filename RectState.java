@@ -26,8 +26,11 @@ public class RectState extends State{
 		int h = y - y0;
 		stateManager.canvas.removeDrawing(rect);
 		rect = new MyRectangle(x0, y0, w, h);
+		rect.setLength(stateManager.getLength());
+		rect.setSpace(stateManager.getSpace());
 		rect.setDashed(stateManager.getDashed());
 		rect.setShadowed(stateManager.getShadowed());
+		rect.setLines(stateManager.getLines());
 		stateManager.canvas.addDrawing(rect);
 	}
 }

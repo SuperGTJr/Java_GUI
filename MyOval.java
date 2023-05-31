@@ -20,6 +20,8 @@ public class MyOval extends MyDrawing
 		int y = getY();
 		int w = getW();
 		int h = getH();
+		int l = getLines();
+		
 		
 		//高さや横幅が負のときのための処理
 		if(w < 0) {
@@ -46,6 +48,14 @@ public class MyOval extends MyDrawing
 		g2.setColor(getFillColor());
 		g2.fillOval(x, y, w, h);
 		g2.setColor(getLineColor());
-		g2.drawOval(x, y, w, h);
+		if (l > 1) {
+		    for (int i = 0; i < l; i++) {
+		        int move = i * 2;
+		        int shrink = i * 4;
+		        g2.drawOval(x + move, y + move, w - shrink, h - shrink);
+		    }
+		} else {
+		    g2.drawOval(x, y, w, h);
+		}
 	}
 }

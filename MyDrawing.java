@@ -8,6 +8,8 @@ public class MyDrawing
 	private int lineWidth; //線の太さ
 	private boolean isDashed = false; //線の種類
 	private boolean isShadowed = false; //ドロップシャドウ
+	private float length, space; //破線のパターン
+	private int lines; //線の数
 	
 	
 	public MyDrawing(int x, int y, int w, int h) {
@@ -62,6 +64,18 @@ public class MyDrawing
 		isShadowed = s;
 	}
 	
+	public void setLength(float length) {
+		this.length = length;
+	}
+
+	public void setSpace(float space) {
+		this.space = space;
+	}
+	
+	public void setLines(int lines) {
+		this.lines = lines;
+	}
+	
 	public int getX() {
 		//オブジェクトのXの位置を取得する処理を書く
 		return x;
@@ -105,5 +119,17 @@ public class MyDrawing
 	public boolean getShadowed() {
 		//ドロップシャドウを行うか否か
 		return isShadowed;
+	}
+	
+	public float getLength() {
+		return length;
+	}
+
+	public float getSpace(){
+		return space;
+	}
+	
+	public int getLines() {
+		return lines;
 	}
 }

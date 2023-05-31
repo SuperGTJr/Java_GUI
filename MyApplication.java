@@ -8,7 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+//import javax.swing.JTabbedPane;
 
 public class MyApplication extends JFrame{
 	StateManager stateManager;
@@ -28,7 +30,7 @@ public class MyApplication extends JFrame{
 		RectButton rectButton = new RectButton(stateManager);
 		jp.add(rectButton);
 		OvalButton ovalButton = new OvalButton(stateManager);
-		jp.add(ovalButton);
+    	jp.add(ovalButton);
 		TriangleButton triangleButton = new TriangleButton(stateManager);
 		jp.add(triangleButton);
 		HendecagonalButton hendecagonalButton = new HendecagonalButton(stateManager);
@@ -38,6 +40,35 @@ public class MyApplication extends JFrame{
 		jp.add(dashCheck);
 		ShadowCheck shadowCheck = new ShadowCheck(stateManager);
 		jp.add(shadowCheck);
+		
+//		DashLengthSpinner dashLengthSpinner = new DashLengthSpinner(stateManager);
+//		jp.add(dashLengthSpinner);
+		
+		JLabel linesLabel = new JLabel("Lines:");
+		jp.add(linesLabel);
+		LineSpinner lineSpinner = new LineSpinner(stateManager);
+		jp.add(lineSpinner);
+		
+//Panelで機能を分けられたら素敵ですね
+//		JPanel shapePanel = new JPanel();
+//        shapePanel.setLayout(new FlowLayout());
+//        shapePanel.add(rectButton);
+//        shapePanel.add(ovalButton);
+//        shapePanel.add(triangleButton);
+//        shapePanel.add(hendecagonalButton);
+//		
+//		JPanel optionPanel = new JPanel();
+//	    optionPanel.setLayout(new FlowLayout());
+//	    optionPanel.add(dashCheck);
+//	    optionPanel.add(shadowCheck);
+//
+//	    JTabbedPane tabbedPane = new JTabbedPane();
+//	    tabbedPane.addTab("Shapes", shapePanel);
+//	    tabbedPane.addTab("Options", optionPanel);
+//	    
+//	    getContentPane().setLayout(new BorderLayout());
+//        getContentPane().add(tabbedPane, BorderLayout.NORTH);
+//        getContentPane().add(canvas, BorderLayout.CENTER);
 		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(jp, BorderLayout.NORTH);
