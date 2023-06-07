@@ -49,6 +49,11 @@ public class MyApplication extends JFrame{
 		LineSpinner lineSpinner = new LineSpinner(stateManager);
 		jp.add(lineSpinner);
 		
+		JLabel lineWidthLabel = new JLabel("Width:");
+		jp.add(lineWidthLabel);
+		LineWidthSpinner lineWidthSpinner = new LineWidthSpinner(stateManager);
+		jp.add(lineWidthSpinner);
+		
 //Panelで機能を分けられたら素敵ですね
 //		JPanel shapePanel = new JPanel();
 //        shapePanel.setLayout(new FlowLayout());

@@ -7,6 +7,7 @@ public class StateManager
 	float length;
 	float space;
 	int lines;
+	int lineWidth;
 	
 	
 	public StateManager(MyCanvas canvas) {
@@ -39,6 +40,10 @@ public class StateManager
 		this.lines = lines;
 	}
 	
+	public void setWidth(int width) {
+		this.lineWidth = width;
+	}
+	
 	public boolean getDashed() {
 		return dashed;
 	}
@@ -57,6 +62,10 @@ public class StateManager
 	
 	public int getLines() {
 		return lines;
+	}
+	
+	public int getWidth() {
+		return lineWidth;
 	}
 	
 	public void mouseDown(int x, int y) {

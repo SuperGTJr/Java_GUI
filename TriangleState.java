@@ -28,6 +28,8 @@ public class TriangleState extends State{
 		triangle = new MyTriangle(x0, y0, w, h);
 		triangle.setDashed(stateManager.getDashed());
 		triangle.setShadowed(stateManager.getShadowed());
+		triangle.setLines(stateManager.getLines());
+		triangle.setWidth(stateManager.getWidth());
 		stateManager.canvas.addDrawing(triangle);
 	}
 }

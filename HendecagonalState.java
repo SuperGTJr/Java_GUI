@@ -28,6 +28,8 @@ public class HendecagonalState extends State{
 		hendecagonal = new MyHendecagonal(x0, y0, w, h);
 		hendecagonal.setDashed(stateManager.getDashed());
 		hendecagonal.setShadowed(stateManager.getShadowed());
+		hendecagonal.setLines(stateManager.getLines());
+		hendecagonal.setWidth(stateManager.getWidth());
 		stateManager.canvas.addDrawing(hendecagonal);
 	}
 }

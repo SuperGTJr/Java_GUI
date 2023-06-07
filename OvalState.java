@@ -30,6 +30,7 @@ public class OvalState extends State{
 		oval.setDashed(stateManager.getDashed());
 		oval.setShadowed(stateManager.getShadowed());
 		oval.setLines(stateManager.getLines());
+		oval.setWidth(stateManager.getWidth());
 		stateManager.canvas.addDrawing(oval);
 	}
 }
