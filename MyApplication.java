@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
@@ -20,12 +19,12 @@ public class MyApplication extends JFrame{
 		super("My Paint Application");
 		
 		canvas = new MyCanvas();
-		canvas.setBackground(Color.white);
 		
 		JPanel jp = new JPanel();
 		jp.setLayout(new FlowLayout());
 		
-		stateManager = new StateManager(canvas);
+		stateManager = new StateManager(canvas.mediator);
+		stateManager.setState(new RectState(stateManager));
 		
 		RectButton rectButton = new RectButton(stateManager);
 		jp.add(rectButton);
@@ -35,6 +34,8 @@ public class MyApplication extends JFrame{
 		jp.add(triangleButton);
 		HendecagonalButton hendecagonalButton = new HendecagonalButton(stateManager);
 		jp.add(hendecagonalButton);
+		SelectButton selectButton = new SelectButton(stateManager);
+		jp.add(selectButton);
 		
 		DashCheck dashCheck = new DashCheck(stateManager);
 		jp.add(dashCheck);
@@ -83,18 +84,18 @@ public class MyApplication extends JFrame{
 			//現在の状態のmouseDown処理の呼び出し
 			public void mousePressed(MouseEvent e) {
 				stateManager.mouseDown(e.getX(), e.getY());
-				canvas.repaint();
+				canvas.mediator.repaint();
 			}
 			public void mouseReleased(MouseEvent e) {
 				stateManager.mouseUp(e.getX(), e.getY());
-				canvas.repaint();
+				canvas.mediator.repaint();
 			}
 		});
 		
 		canvas.addMouseMotionListener(new MouseAdapter() {
 			public void mouseDragged(MouseEvent e) {
 				stateManager.mouseDrag(e.getX(), e.getY());
-				canvas.repaint();
+			    canvas.mediator.repaint();
 			}
 		});
 		

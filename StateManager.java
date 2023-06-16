@@ -1,7 +1,7 @@
 public class StateManager
 {
 	State state;
-	MyCanvas canvas;
+	Mediator mediator;
 	boolean dashed;
 	boolean shadowed;
 	float length;
@@ -10,8 +10,8 @@ public class StateManager
 	int lineWidth;
 	
 	
-	public StateManager(MyCanvas canvas) {
-		this.canvas = canvas;
+	public StateManager(Mediator mediator) {
+		this.mediator = mediator;
 		
 	}
 	

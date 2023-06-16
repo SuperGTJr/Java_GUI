@@ -8,15 +8,17 @@ public class OvalState extends State{
 	
 	public void mouseDown(int x, int y) {
 		oval = new MyOval(x, y, 0, 0);
-		stateManager.canvas.addDrawing(oval);
+		stateManager.mediator.addDrawing(oval);
 	}
 	
 	public void mouseUp(int x, int y) {
 		int w = oval.getW();
 		int h = oval.getH();
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
-			stateManager.canvas.removeDrawing(oval);
+			stateManager.mediator.removeDrawing(oval);
 		}
+		
+		oval.setRegion();
 	}
 	
 	public void mouseDrag(int x, int y) {
@@ -25,12 +27,14 @@ public class OvalState extends State{
 		int w = x - x0;
 		int h = y - y0;
 
-		stateManager.canvas.removeDrawing(oval);
-		oval = new MyOval(x0, y0, w, h);
+//		stateManager.mediator.removeDrawing(oval);
+//		oval = new MyOval(x0, y0, w, h);
+		oval.setLocation(x0, y0);
+		oval.setSize(w, h);
 		oval.setDashed(stateManager.getDashed());
 		oval.setShadowed(stateManager.getShadowed());
 		oval.setLines(stateManager.getLines());
 		oval.setWidth(stateManager.getWidth());
-		stateManager.canvas.addDrawing(oval);
+//		stateManager.mediator.addDrawing(oval);
 	}
 }

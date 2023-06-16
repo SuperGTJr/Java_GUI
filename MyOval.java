@@ -2,6 +2,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class MyOval extends MyDrawing
 {
@@ -15,7 +16,17 @@ public class MyOval extends MyDrawing
 		super(xpt, ypt, wpt, hpt, lc, fc);
 	}
 	
+	public void setRegion() {
+//		region = new Rectangle(getX(),getY(),getW(),getH());
+		region = new Rectangle(x,y,w,h);
+	}
+	
+	public boolean contains(int x, int y) {
+		return region.contains(x,y);
+	}
+	
 	public void draw(Graphics g) {
+		super.draw(g);
 		int x = getX();
 		int y = getY();
 		int w = getW();

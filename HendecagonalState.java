@@ -8,14 +8,14 @@ public class HendecagonalState extends State{
 	
 	public void mouseDown(int x, int y) {
 		hendecagonal = new MyHendecagonal(x, y, 0, 0);
-		stateManager.canvas.addDrawing(hendecagonal);
+		stateManager.mediator.addDrawing(hendecagonal);
 	}
 	
 	public void mouseUp(int x, int y) {
 		int w = hendecagonal.getW();
 		int h = hendecagonal.getH();
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
-			stateManager.canvas.removeDrawing(hendecagonal);
+			stateManager.mediator.removeDrawing(hendecagonal);
 		}
 	}
 	
@@ -24,12 +24,14 @@ public class HendecagonalState extends State{
 		int y0 = hendecagonal.getY();
 		int w = x - x0;
 		int h = y - y0;
-		stateManager.canvas.removeDrawing(hendecagonal);
-		hendecagonal = new MyHendecagonal(x0, y0, w, h);
+//		stateManager.mediator.removeDrawing(hendecagonal);
+//		hendecagonal = new MyHendecagonal(x0, y0, w, h);
+		hendecagonal.setLocation(x0, y0);
+		hendecagonal.setSize(w, h);
 		hendecagonal.setDashed(stateManager.getDashed());
 		hendecagonal.setShadowed(stateManager.getShadowed());
 		hendecagonal.setLines(stateManager.getLines());
 		hendecagonal.setWidth(stateManager.getWidth());
-		stateManager.canvas.addDrawing(hendecagonal);
+//		stateManager.mediator.addDrawing(hendecagonal);
 	}
 }

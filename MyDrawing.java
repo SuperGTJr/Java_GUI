@@ -1,15 +1,20 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
 public class MyDrawing
 {
-	private int x, y, w, h; //X座標 Y座標 幅 高さ
+	int x, y, w, h; //X座標 Y座標 幅 高さ
 	private Color lineColor, fillColor; //線の色 塗りの色
 	private int lineWidth; //線の太さ
 	private boolean isDashed = false; //線の種類
 	private boolean isShadowed = false; //ドロップシャドウ
 	private float length, space; //破線のパターン
 	private int lines; //線の数
+	private boolean isSelected = false; //選択状態
+	Shape region;	//包含判定用
+	final int SIZE = 7;
 	
 	
 	public MyDrawing(int x, int y, int w, int h) {
@@ -24,11 +29,26 @@ public class MyDrawing
 	}
 	
 	public void draw(Graphics g) {
+		//選択状態を表す四角形を描く
+		System.out.println(isSelected);
+		if(isSelected) {
+			g.setColor(Color.black);
+			g.fillRect(x+w/2-SIZE/2, y-SIZE/2, SIZE, SIZE);
+			g.fillRect(x-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+			g.fillRect(x+w/2-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+			g.fillRect(x+w-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+			g.fillRect(x-SIZE/2, y-SIZE/2, SIZE, SIZE);
+			g.fillRect(x+w-SIZE/2, y-SIZE/2, SIZE, SIZE);
+			g.fillRect(x-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+			g.fillRect(x+w-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+		}
 		
 	}
 	
 	public void move(int dx, int dy) {
 		//オブジェクトを移動する処理を書く
+		setLocation(x+dx, y+dy);
+		setRegion();
 	}
 	
 	public void setLocation(int x, int y) {
@@ -74,6 +94,16 @@ public class MyDrawing
 	
 	public void setLines(int lines) {
 		this.lines = lines;
+	}
+	
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	
+	public void setRegion() {
+		//MyDrawingを継承する子クラス内でそれぞれ定義する
+		//包含判定が矩形ならば、たとえば
+		region = new Rectangle(x,y,w,h);
 	}
 	
 	public int getX() {
@@ -132,4 +162,18 @@ public class MyDrawing
 	public int getLines() {
 		return lines;
 	}
+	
+	public boolean getSelected() {
+		return isSelected;
+	}
+	
+	public boolean contains(int x, int y) {
+		//MyDrawingを継承する子クラス内でそれぞれ定義する
+		//包含判定が矩形ならば、たとえば
+		return region.contains(x,y);
+	}
 }
+
+
+
+
