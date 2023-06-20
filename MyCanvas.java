@@ -11,6 +11,10 @@ public class MyCanvas extends JPanel
 	public MyCanvas() {
 		this.mediator = new Mediator(this);
 		setBackground(Color.white);
+		setFocusable(true);
+		
+		ShortCutKeyListener shortCut = new ShortCutKeyListener(mediator);
+		addKeyListener(shortCut);
 	}
 	
 	public Mediator getMediator() {

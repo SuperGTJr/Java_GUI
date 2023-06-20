@@ -15,7 +15,20 @@ public class MyRectangle extends MyDrawing
 	}
 	
 	public void setRegion() {
-//		region = new Rectangle(getX(),getY(),getW(),getH());
+		int x = getX();
+		int y = getY();
+		int w = getW();
+		int h = getH();
+		
+		if(w < 0) {
+			x += w;
+			w *= -1;
+		}
+		if(h < 0) {
+			y += h;
+			h *= -1;
+		}
+		
 		region = new Rectangle(x,y,w,h);
 	}
 	

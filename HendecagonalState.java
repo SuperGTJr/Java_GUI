@@ -17,6 +17,7 @@ public class HendecagonalState extends State{
 		if((w<1 && w>-1) || (h<1 && h>-1)) {
 			stateManager.mediator.removeDrawing(hendecagonal);
 		}
+		hendecagonal.setRegion();
 	}
 	
 	public void mouseDrag(int x, int y) {

@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-public class MyDrawing
+public class MyDrawing implements Cloneable
 {
 	int x, y, w, h; //X座標 Y座標 幅 高さ
 	private Color lineColor, fillColor; //線の色 塗りの色
@@ -45,6 +45,16 @@ public class MyDrawing
 		
 	}
 	
+	@Override
+	public MyDrawing clone() {
+		try {
+            MyDrawing clone = (MyDrawing) super.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
+	
 	public void move(int dx, int dy) {
 		//オブジェクトを移動する処理を書く
 		setLocation(x+dx, y+dy);
@@ -66,6 +76,14 @@ public class MyDrawing
 	public void setColor(Color lineColor, Color fillColor) {
 		//オブジェクトの線・塗りの色を変更する処理を書く
 		this.lineColor = lineColor;
+		this.fillColor = fillColor;
+	}
+	
+	public void setLineColor(Color lineColor) {
+		this.lineColor = lineColor;
+	}
+	
+	public void setFillColor(Color fillColor) {
 		this.fillColor = fillColor;
 	}
 	

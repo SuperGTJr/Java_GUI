@@ -12,7 +12,6 @@ public class StateManager
 	
 	public StateManager(Mediator mediator) {
 		this.mediator = mediator;
-		
 	}
 	
 	public void setState(State state) {

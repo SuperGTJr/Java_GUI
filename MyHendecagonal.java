@@ -2,10 +2,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class MyHendecagonal extends MyDrawing
 {
-	//w=hのとき正十一角形となるように変更
+	
+	private int numV =11;
+	
 	public MyHendecagonal(int xpt, int ypt, int wpt, int hpt) {
 		super(xpt, ypt, wpt, hpt);
 	}
@@ -14,21 +17,39 @@ public class MyHendecagonal extends MyDrawing
 		super(xpt, ypt, wpt, hpt, lc, fc);
 	}
 	
-	private int numV = 11;
-	
-	public void draw(Graphics g) {
+	public void setRegion() {
 		int x = getX();
 		int y = getY();
 		int w = getW();
 		int h = getH();
 		
+		if(w < 0) {
+			x += w;
+			w *= -1;
+		}
+		if(h < 0) {
+			y += h;
+			h *= -1;
+		}
+		
+		region = new Rectangle(x,y,w,h);
+	}
+	
+	public void draw(Graphics g) {
+		super.draw(g);
+		int x = getX();
+		int y = getY();
+		int w = getW()/2;
+		int h = getH()/2;
 		
 		int[] xpts = new int[numV];
 		int[] ypts = new int[numV];
+		int centerX = x + w;
+		int centerY = y + h;
 		for(int i=0; i<numV; i++) {
 			double angle = 2 * Math.PI * i / numV;
-			xpts[i] = x + (int)(w * Math.cos(angle));
-			ypts[i] = y + (int)(h * Math.sin(angle));
+			xpts[i] = centerX - (int)(w * Math.cos(angle));
+			ypts[i] = centerY - (int)(h * Math.sin(angle));
 		}
 		
 		

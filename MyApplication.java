@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
@@ -8,12 +9,16 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 //import javax.swing.JTabbedPane;
 
 public class MyApplication extends JFrame{
 	StateManager stateManager;
 	MyCanvas canvas;
+	private JMenuBar menuBar;
+	private JMenu colorMenu;
 	
 	public MyApplication() {
 		super("My Paint Application");
@@ -36,6 +41,44 @@ public class MyApplication extends JFrame{
 		jp.add(hendecagonalButton);
 		SelectButton selectButton = new SelectButton(stateManager);
 		jp.add(selectButton);
+		
+		//メニュー
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		colorMenu = new JMenu("Color");
+		JMenu colorLine = new JMenu("Line");
+		JMenu otherLineColor = new JMenu("Other");
+		JMenu colorFill = new JMenu("Fill");
+		JMenu otherFillColor = new JMenu("Other");
+		
+		ColorItem lineRedItem = new ColorItem(canvas.mediator, Color.red, "red", "LINE");
+		ColorItem lineBlueItem = new ColorItem(canvas.mediator, Color.blue, "blue", "LINE");
+		ColorItem lineGreenItem = new ColorItem(canvas.mediator, Color.green, "green", "LINE");
+		ColorChooser lineChooser = new ColorChooser(canvas.mediator, "LINE");
+		otherLineColor.add(lineChooser);
+		
+		ColorItem fillRedItem = new ColorItem(canvas.mediator, Color.red, "red", "FILL");
+		ColorItem fillBlueItem = new ColorItem(canvas.mediator, Color.blue, "blue", "FILL");
+		ColorItem fillGreenItem = new ColorItem(canvas.mediator, Color.green, "green", "FILL");
+		ColorChooser fillChooser = new ColorChooser(canvas.mediator, "FILL");
+		otherFillColor.add(fillChooser);
+		
+		colorLine.add(lineRedItem);
+		colorLine.add(lineBlueItem);
+		colorLine.add(lineGreenItem);
+		colorLine.add(otherLineColor);
+		
+		colorFill.add(fillRedItem);
+		colorFill.add(fillBlueItem);
+		colorFill.add(fillGreenItem);
+		colorFill.add(otherFillColor);
+		
+		colorMenu.add(colorLine);
+		colorMenu.add(colorFill);
+		
+		menuBar.add(colorMenu);
 		
 		DashCheck dashCheck = new DashCheck(stateManager);
 		jp.add(dashCheck);
