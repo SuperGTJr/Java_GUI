@@ -30,7 +30,7 @@ public class Mediator
 	public void setSelectedDrawing(MyDrawing selectedDrawing) {
 		this.selectedDrawing = selectedDrawing;
 		canvas.requestFocusInWindow();
-		System.out.println(selectedDrawing);
+//		System.out.println(selectedDrawing);
 	}
 	
 	public MyDrawing getSelectedDrawing() {
@@ -40,7 +40,7 @@ public class Mediator
 	public void move(int dx, int dy) {
 		if (selectedDrawing != null) {
 			selectedDrawing.move(dx, dy);
-			repaint();
+			selectedDrawing.setRegion();	
 		}
 	}
 	
@@ -49,7 +49,8 @@ public class Mediator
 	}
 	
 	public void setSelected(int x, int y) {
-		MyDrawing check = null; // 最前面の選択図形
+		// 最前面の選択図形
+		MyDrawing check = null; 
 
 	    for (Enumeration<MyDrawing> e = drawingElements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
@@ -60,13 +61,14 @@ public class Mediator
 	        }
 	    }
 
-	    for (MyDrawing d : drawings) {
+	    for (Enumeration<MyDrawing> e = drawingElements(); e.hasMoreElements();) {
+	    	MyDrawing d = e.nextElement();
 	        if (d == check) {
 	            d.setSelected(true);
-	            System.out.println("true " + d);
+//	            System.out.println("true " + d);
 	        } else {
 	            d.setSelected(false);
-	            System.out.println("false " + d);
+//	            System.out.println("false " + d);
 	        }
 	    }
 
@@ -77,12 +79,31 @@ public class Mediator
 	    setSelectedDrawing(check);
 	}
 	
+	
+	//属性変更
+	public void setShadowed(boolean shadowed) {
+		selectedDrawing.setShadowed(shadowed);
+	}
+	
+	public void setDashed(boolean dashed) {
+		selectedDrawing.setDashed(dashed);
+	}
+	
 	public void setLineColor(Color color) {
 		selectedDrawing.setLineColor(color);
 	}
 	
 	public void setFillColor(Color color) {
 		selectedDrawing.setFillColor(color);
+	}
+	
+	public void setLineWidth(int lineWidth) {
+		selectedDrawing.setLineWidth(lineWidth);
+	}
+	
+	public void setLines(int lines) {
+		selectedDrawing.setLines(lines);
+		repaint();
 	}
 	
 	public void removeSelectedDrawing() {

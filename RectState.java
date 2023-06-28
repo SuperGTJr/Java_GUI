@@ -31,10 +31,6 @@ public class RectState extends State{
 //		rect.setSpace(stateManager.getSpace());
 		rect.setLocation(x0, y0);
 		rect.setSize(w, h);
-		rect.setDashed(stateManager.getDashed());
-		rect.setShadowed(stateManager.getShadowed());
-		rect.setLines(stateManager.getLines());
-		rect.setWidth(stateManager.getWidth());
 //		stateManager.mediator.addDrawing(rect);
 	}
 }

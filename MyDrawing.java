@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.Shape;
 
 public class MyDrawing implements Cloneable
@@ -58,7 +57,6 @@ public class MyDrawing implements Cloneable
 	public void move(int dx, int dy) {
 		//オブジェクトを移動する処理を書く
 		setLocation(x+dx, y+dy);
-		setRegion();
 	}
 	
 	public void setLocation(int x, int y) {
@@ -87,7 +85,7 @@ public class MyDrawing implements Cloneable
 		this.fillColor = fillColor;
 	}
 	
-	public void setWidth(int lineWidth) {
+	public void setLineWidth(int lineWidth) {
 		//オブジェクトの線の太さを変更する処理を書く
 		this.lineWidth = lineWidth;
 	}
@@ -121,7 +119,7 @@ public class MyDrawing implements Cloneable
 	public void setRegion() {
 		//MyDrawingを継承する子クラス内でそれぞれ定義する
 		//包含判定が矩形ならば、たとえば
-		region = new Rectangle(x,y,w,h);
+//		region = new Rectangle(x,y,w,h);
 	}
 	
 	public int getX() {

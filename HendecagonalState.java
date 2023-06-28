@@ -29,10 +29,6 @@ public class HendecagonalState extends State{
 //		hendecagonal = new MyHendecagonal(x0, y0, w, h);
 		hendecagonal.setLocation(x0, y0);
 		hendecagonal.setSize(w, h);
-		hendecagonal.setDashed(stateManager.getDashed());
-		hendecagonal.setShadowed(stateManager.getShadowed());
-		hendecagonal.setLines(stateManager.getLines());
-		hendecagonal.setWidth(stateManager.getWidth());
 //		stateManager.mediator.addDrawing(hendecagonal);
 	}
 }

@@ -46,6 +46,7 @@ public class MyHendecagonal extends MyDrawing
 		int[] ypts = new int[numV];
 		int centerX = x + w;
 		int centerY = y + h;
+		
 		for(int i=0; i<numV; i++) {
 			double angle = 2 * Math.PI * i / numV;
 			xpts[i] = centerX - (int)(w * Math.cos(angle));
@@ -58,9 +59,9 @@ public class MyHendecagonal extends MyDrawing
 			if(getShadowed()) {
 				int[] sxpts = new int[numV];
 				int[] sypts = new int[numV];
-				for(int j=0; j<numV; j++) {
-					sxpts[j] = xpts[j] + 3;
-					sypts[j] = ypts[j] + 3;
+				for(int i=0; i<numV; i++) {
+					sxpts[i] = xpts[i] + 3;
+					sypts[i] = ypts[i] + 3;
 				}
 				g2.setColor(Color.black);
 				g2.fillPolygon(sxpts, sypts, numV);

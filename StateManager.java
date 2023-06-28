@@ -3,11 +3,8 @@ public class StateManager
 	State state;
 	Mediator mediator;
 	boolean dashed;
-	boolean shadowed;
 	float length;
 	float space;
-	int lines;
-	int lineWidth;
 	
 	
 	public StateManager(Mediator mediator) {
@@ -23,10 +20,6 @@ public class StateManager
 		this.dashed = dashed;
 	}
 	
-	public void setShadowed(boolean shadowed) {
-		this.shadowed = shadowed;
-	}
-	
 	public void setLength(float length) {
 		this.length = length;
 	}
@@ -35,20 +28,8 @@ public class StateManager
 		this.space = space;
 	}
 	
-	public void setLines(int lines) {
-		this.lines = lines;
-	}
-	
-	public void setWidth(int width) {
-		this.lineWidth = width;
-	}
-	
 	public boolean getDashed() {
 		return dashed;
-	}
-	
-	public boolean getShadowed(){
-		return shadowed;
 	}
 	
 	public float getLength() {
@@ -58,15 +39,7 @@ public class StateManager
 	public float getSpace(){
 		return space;
 	}
-	
-	public int getLines() {
-		return lines;
-	}
-	
-	public int getWidth() {
-		return lineWidth;
-	}
-	
+
 	public void mouseDown(int x, int y) {
 		//現在のstateについて、対応するmouseDownを実行する
         state.mouseDown(x, y);

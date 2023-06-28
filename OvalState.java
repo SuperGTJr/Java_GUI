@@ -31,10 +31,6 @@ public class OvalState extends State{
 //		oval = new MyOval(x0, y0, w, h);
 		oval.setLocation(x0, y0);
 		oval.setSize(w, h);
-		oval.setDashed(stateManager.getDashed());
-		oval.setShadowed(stateManager.getShadowed());
-		oval.setLines(stateManager.getLines());
-		oval.setWidth(stateManager.getWidth());
 //		stateManager.mediator.addDrawing(oval);
 	}
 }

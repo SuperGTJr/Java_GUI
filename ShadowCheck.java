@@ -4,23 +4,25 @@ import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
 
 public class ShadowCheck extends JCheckBox{
-	StateManager stateManager;
+	Mediator mediator;
 	
-	public ShadowCheck(StateManager stateManager) {
+	public ShadowCheck(Mediator mediator) {
 		super("shadow check");
 		
-		addItemListener(new DashListener());
+		addItemListener(new ShadowListener());
 		
-		this.stateManager = stateManager;
+		this.mediator = mediator;
 	}
 	
-	class DashListener implements ItemListener{
+	class ShadowListener implements ItemListener{
 		public void itemStateChanged(ItemEvent e) {
 			int state = e.getStateChange();
 			if(state==ItemEvent.SELECTED) {
-				stateManager.setShadowed(true);
+				mediator.setShadowed(true);
+				mediator.repaint();
 			}else {
-				stateManager.setShadowed(false);
+				mediator.setShadowed(false);
+				mediator.repaint();
 			}
 		}
 	}

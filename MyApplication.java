@@ -80,9 +80,9 @@ public class MyApplication extends JFrame{
 		
 		menuBar.add(colorMenu);
 		
-		DashCheck dashCheck = new DashCheck(stateManager);
+		DashCheck dashCheck = new DashCheck(canvas.mediator);
 		jp.add(dashCheck);
-		ShadowCheck shadowCheck = new ShadowCheck(stateManager);
+		ShadowCheck shadowCheck = new ShadowCheck(canvas.mediator);
 		jp.add(shadowCheck);
 		
 //		DashLengthSpinner dashLengthSpinner = new DashLengthSpinner(stateManager);
@@ -90,12 +90,12 @@ public class MyApplication extends JFrame{
 		
 		JLabel linesLabel = new JLabel("Lines:");
 		jp.add(linesLabel);
-		LineSpinner lineSpinner = new LineSpinner(stateManager);
+		LineSpinner lineSpinner = new LineSpinner(canvas.mediator);
 		jp.add(lineSpinner);
 		
 		JLabel lineWidthLabel = new JLabel("Width:");
 		jp.add(lineWidthLabel);
-		LineWidthSpinner lineWidthSpinner = new LineWidthSpinner(stateManager);
+		LineWidthSpinner lineWidthSpinner = new LineWidthSpinner(canvas.mediator);
 		jp.add(lineWidthSpinner);
 		
 //Panelで機能を分けられたら素敵ですね
@@ -151,7 +151,7 @@ public class MyApplication extends JFrame{
 	}
 	
 	public Dimension getPreferredSize() {
-		return new Dimension(800, 800);
+		return new Dimension(1000, 800);
 	}
 	
 	public static void main(String args[]) {

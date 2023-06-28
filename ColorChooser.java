@@ -24,11 +24,11 @@ public class ColorChooser extends JColorChooser{
     		if(mediator.selectedDrawing != null) {
     			if(type == "LINE") {
     				mediator.selectedDrawing.setLineColor(color);
-        			mediator.repaint();
+    				mediator.repaint();
     			}
     			else if(type == "FILL") {
     				mediator.selectedDrawing.setFillColor(color);
-        			mediator.repaint();
+    				mediator.repaint();
     			}
     		}
     	}

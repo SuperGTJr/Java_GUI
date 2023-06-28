@@ -4,21 +4,26 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class LineWidthSpinner extends JSpinner {
-    private StateManager stateManager;
+    private Mediator mediator;
 
-    public LineWidthSpinner(StateManager stateManager) {
+    public LineWidthSpinner(Mediator mediator) {
         super(new SpinnerNumberModel(1, 1, 25, 1));
 
         addChangeListener(new LineWidthListener());
         
-        this.stateManager = stateManager;
-
+        this.mediator = mediator;
     }
-
+    
+//    public void update() {
+//    	int lineWidth = mediator.selectedDrawing.getLineWidth();
+//    	setValue(lineWidth);
+//    }
+    
     class LineWidthListener implements ChangeListener {
         public void stateChanged(ChangeEvent e) {
             int lineWidth = (int) getValue();
-            stateManager.setWidth(lineWidth);
+            mediator.setLineWidth(lineWidth);
+            mediator.repaint();
         }
     }
 }

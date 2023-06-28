@@ -4,21 +4,21 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class LineSpinner extends JSpinner {
-    private StateManager stateManager;
+    private Mediator mediator;
 
-    public LineSpinner(StateManager stateManager) {
+    public LineSpinner(Mediator mediator) {
         super(new SpinnerNumberModel(1, 1, 10, 1));
 
         addChangeListener(new LineChangeListener());
         
-        this.stateManager = stateManager;
+        this.mediator = mediator;
 
     }
 
     class LineChangeListener implements ChangeListener {
         public void stateChanged(ChangeEvent e) {
             int lines = (int) getValue();
-            stateManager.setLines(lines);
+            mediator.setLines(lines);
         }
     }
 }

@@ -4,23 +4,23 @@ import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
 
 public class DashCheck extends JCheckBox{
-	StateManager stateManager;
+	Mediator mediator;
 	
-	public DashCheck(StateManager stateManager) {
+	public DashCheck(Mediator mediator) {
 		super("dash check");
 		
 		addItemListener(new DashListener());
 		
-		this.stateManager = stateManager;
+		this.mediator = mediator;
 	}
 	
 	class DashListener implements ItemListener{
 		public void itemStateChanged(ItemEvent e) {
 			int state = e.getStateChange();
 			if(state==ItemEvent.SELECTED) {
-				stateManager.setDashed(true);
+				mediator.setDashed(true);
 			}else {
-				stateManager.setDashed(false);
+				mediator.setDashed(false);
 			}
 		}
 	}
