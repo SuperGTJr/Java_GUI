@@ -25,11 +25,11 @@ public class ColorItem extends JMenuItem{
     	 public void actionPerformed(ActionEvent e) {
     		if(mediator.selectedDrawing != null) {
     			if(type == "LINE") {
-    				mediator.selectedDrawing.setLineColor(color);
+    				mediator.setLineColor(color);
     				mediator.repaint();
     			}
     			else if(type == "FILL") {
-    				mediator.selectedDrawing.setFillColor(color);
+    				mediator.setFillColor(color);
     				mediator.repaint();
     			}
     		}

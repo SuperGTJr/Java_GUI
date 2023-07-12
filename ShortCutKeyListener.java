@@ -12,6 +12,7 @@ public class ShortCutKeyListener implements KeyListener {
     	if(e.isControlDown()) {
     		if(e.getKeyCode() == KeyEvent.VK_C) {
     			mediator.copy();
+    			System.out.println("copy");
     		}else if(e.getKeyCode() == KeyEvent.VK_X) {
     			mediator.cut();
     		}else if(e.getKeyCode() == KeyEvent.VK_V) {

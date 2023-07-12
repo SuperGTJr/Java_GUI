@@ -19,6 +19,7 @@ public class MyApplication extends JFrame{
 	MyCanvas canvas;
 	private JMenuBar menuBar;
 	private JMenu colorMenu;
+	private JMenu fileMenu;
 	
 	public MyApplication() {
 		super("My Paint Application");
@@ -47,6 +48,18 @@ public class MyApplication extends JFrame{
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
+		//File
+		fileMenu = new JMenu("File");
+		SaveAndLoadItem saveItem = new SaveAndLoadItem(canvas.mediator, "Save", "SAVE");
+		SaveAndLoadItem loadItem = new SaveAndLoadItem(canvas.mediator, "Load", "LOAD");
+		
+		fileMenu.add(saveItem);
+		fileMenu.add(loadItem);
+		
+		menuBar.add(fileMenu);
+		
+		
+		//Color
 		colorMenu = new JMenu("Color");
 		JMenu colorLine = new JMenu("Line");
 		JMenu otherLineColor = new JMenu("Other");

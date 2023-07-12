@@ -19,6 +19,7 @@ public class LineSpinner extends JSpinner {
         public void stateChanged(ChangeEvent e) {
             int lines = (int) getValue();
             mediator.setLines(lines);
+            mediator.repaint();
         }
     }
 }

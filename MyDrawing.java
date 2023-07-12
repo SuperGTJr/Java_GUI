@@ -1,8 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Shape;
+import java.io.Serializable;
 
-public class MyDrawing implements Cloneable
+public class MyDrawing implements Cloneable, Serializable
 {
 	int x, y, w, h; //X座標 Y座標 幅 高さ
 	private Color lineColor, fillColor; //線の色 塗りの色
@@ -29,7 +30,6 @@ public class MyDrawing implements Cloneable
 	
 	public void draw(Graphics g) {
 		//選択状態を表す四角形を描く
-		System.out.println(isSelected);
 		if(isSelected) {
 			g.setColor(Color.black);
 			g.fillRect(x+w/2-SIZE/2, y-SIZE/2, SIZE, SIZE);
