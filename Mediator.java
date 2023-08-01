@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -6,18 +8,23 @@ import java.io.ObjectOutputStream;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class Mediator
 {
 	Vector<MyDrawing> drawings;
 	MyCanvas canvas;
-	Vector<MyDrawing> selectedDrawing = null;
+	Vector<MyDrawing> selectedDrawings = null;
 	Vector<MyDrawing> buffer = null;
 	
 	public Mediator(MyCanvas canvas) {
 		this.canvas = canvas;
 		canvas.requestFocusInWindow();
 		drawings = new Vector<MyDrawing>();
-		selectedDrawing = new Vector<MyDrawing>();
+		selectedDrawings = new Vector<MyDrawing>();
+		canvas.requestFocusInWindow();
 	}
 	
 	public Enumeration<MyDrawing> drawingElements(){
@@ -33,26 +40,24 @@ public class Mediator
 		drawings.remove(d);
 	}
 	
-	public void setSelectedDrawing(Vector<MyDrawing> selectedDrawing) {
-		this.selectedDrawing = selectedDrawing;
-//		System.out.println(selectedDrawing);
+	public void setSelectedDrawings(Vector<MyDrawing> selectedDrawings) {
+		this.selectedDrawings = selectedDrawings;
 	}
 	
-	public void resetSelectedDrawing() {
-		setSelectedDrawing(null);
-		selectedDrawing = new Vector<MyDrawing>();
+	public void resetSelectedDrawings() {
+		setSelectedDrawings(null);
+		selectedDrawings = new Vector<MyDrawing>();
 	}
 	
-	public Vector<MyDrawing> getSelectedDrawing() {
-		return selectedDrawing;
+	public Vector<MyDrawing> getSelectedDrawings() {
+		return selectedDrawings;
 	}
 	
 	public void move(int dx, int dy) {
-		if (selectedDrawing != null) {
-			for(Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		if (selectedDrawings != null) {
+			for(Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 				MyDrawing d = e.nextElement();
 				d.move(dx, dy);
-//				System.out.println(d.getSelected());
 				d.setRegion();
 			}		
 		}
@@ -80,7 +85,7 @@ public class Mediator
 	}
 	
 	public void setSelected(int x, int y) {
-		resetSelectedDrawing();
+		resetSelectedDrawings();
 		// 最前面の選択図形
 		MyDrawing front = null;
 		
@@ -88,7 +93,7 @@ public class Mediator
 	    
 	    if(front!=null) {
 		    front.setSelected(true);
-		    selectedDrawing.add(front);
+		    selectedDrawings.add(front);
 	    }
 	    canvas.requestFocusInWindow();
 	}
@@ -122,14 +127,14 @@ public class Mediator
 		
 	
 	public void setSelectedByArea(MyRectangle area) {
-		resetSelectedDrawing();
+		resetSelectedDrawings();
 		
 		for (Enumeration<MyDrawing> e = drawingElements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
 	        
 	        if(d!=area && isWithinArea(d, area)) {
 	        	d.setSelected(true);
-	        	selectedDrawing.add(d);
+	        	selectedDrawings.add(d);
 	        }
 		}
 		canvas.requestFocusInWindow();
@@ -137,55 +142,69 @@ public class Mediator
 	
 	//属性変更
 	public void setShadowed(boolean shadowed) {
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
 	        d.setShadowed(shadowed);
 		}
 	}
 	
 	public void setDashed(boolean dashed) {
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
 	        d.setDashed(dashed);
 		}
 	}
 	
-	public void setLineColor(Color color) {
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
-	        MyDrawing d = e.nextElement();
-	        d.setLineColor(color);
-		}
-	}
-	
 	public void setFillColor(Color color) {
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
 	        d.setFillColor(color);
 		}
 	}
 	
+	public void setLineColor(Color color) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
+	        MyDrawing d = e.nextElement();
+	        d.setLineColor(color);
+		}
+	}
+
+	public void setFillAlpha(int alpha) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
+	        MyDrawing d = e.nextElement();
+	        d.setFillAlpha(alpha);
+		}
+	}
+	
+	public void setLineAlpha(int alpha) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
+	        MyDrawing d = e.nextElement();
+	        d.setLineAlpha(alpha);
+		}
+	}
+	
 	public void setLineWidth(int lineWidth) {
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
 	        d.setLineWidth(lineWidth);
 		}
 	}
 	
 	public void setLines(int lines) {
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
 	        d.setLines(lines);
 		}
 	}
 	
 	public void removeSelectedDrawing() {
-		if(selectedDrawing != null) {
-			for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		if(selectedDrawings != null) {
+			for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 		        MyDrawing d = e.nextElement();
 		        removeDrawing(d);
-				repaint();
 			}
-			resetSelectedDrawing();
+			repaint();
+			resetSelectedDrawings();
 		}
 	}
 	
@@ -196,36 +215,36 @@ public class Mediator
 	
 	public void copy() {
 		clearBuffer();
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
-	        buffer.add(d);
+	        buffer.add(d.clone());
 		}
 	}
 	
 	public void cut() {
 		clearBuffer();
-		for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 	        MyDrawing d = e.nextElement();
-	        buffer.add(d);
+	        buffer.add(d.clone());
 	        removeDrawing(d);
 		}
 		repaint();
 	}
 	
 	public void paste() {
-		if(selectedDrawing!=null) {
-			for (Enumeration<MyDrawing> e = selectedDrawing.elements(); e.hasMoreElements();) {
+		if(selectedDrawings!=null) {
+			for (Enumeration<MyDrawing> e = selectedDrawings.elements(); e.hasMoreElements();) {
 				MyDrawing d = e.nextElement();
 				d.setSelected(false);
 			}
 		}
-		resetSelectedDrawing();
+		resetSelectedDrawings();
 		
 		for (Enumeration<MyDrawing> e = buffer.elements(); e.hasMoreElements();) {
 	        MyDrawing clone =(MyDrawing)e.nextElement().clone();
 			clone.setLocation(clone.getX()+3, clone.getY()+3);
 			addDrawing(clone);
-			selectedDrawing.add(clone);
+			selectedDrawings.add(clone);
 			clone.setSelected(true);
 		}
 		repaint();
@@ -234,28 +253,72 @@ public class Mediator
 	
 	public void loadData() {
         // File入力
-        try {
-            FileInputStream fin = new FileInputStream("file.txt");
-            ObjectInputStream in = new ObjectInputStream(fin);
+		JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(null);  
 
-            drawings = (Vector<MyDrawing>)in.readObject();
-            fin.close();
-        } catch (Exception ex) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) { 
+            File file = fc.getSelectedFile();
+            
+            try {
+                FileInputStream fin = new FileInputStream(file);
+                ObjectInputStream in = new ObjectInputStream(fin);
+
+                drawings = (Vector<MyDrawing>)in.readObject();
+                for (Enumeration<MyDrawing> e = drawingElements(); e.hasMoreElements();) {
+        	        MyDrawing d = e.nextElement();
+        	        d.setSelected(false);
+                }
+                
+                fin.close();
+            } catch (Exception ex) {
+            }
+ 
         }
+
 	}
 	
 	public void saveData() {
-		try {
-            FileOutputStream fout = new FileOutputStream("file.txt");
-            ObjectOutputStream out = new ObjectOutputStream(fout);
+		JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showSaveDialog(null);  
 
-            out.writeObject(drawings);
-            out.flush();
+        if (returnVal == JFileChooser.APPROVE_OPTION) { 
+            File file = fc.getSelectedFile();
+            
+        	try {
+                FileOutputStream fout = new FileOutputStream(file);
+                ObjectOutputStream out = new ObjectOutputStream(fout);
 
-            fout.close();
-        } catch (Exception ex) {
+                out.writeObject(drawings);
+                out.flush();
+
+                fout.close();
+            } catch (Exception ex) {
+            }
         }
 	}
 	
-	
+	public void loadImage() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Only", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+
+        int returnVal = fileChooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            
+            try {
+                BufferedImage image = ImageIO.read(file);
+                // キャンバスに追加
+                MyImage myImage = new MyImage(50,50,image);
+                addDrawing(myImage);
+                myImage.setRegion();
+            } catch (Exception ex) {
+                // 画像の読み込みに失敗した場合
+                ex.printStackTrace();
+            }
+        }
+    }
+
 }
+
+		

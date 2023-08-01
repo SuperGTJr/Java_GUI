@@ -6,14 +6,9 @@ import java.awt.Rectangle;
 
 public class MyOval extends MyDrawing
 {
-	//superクラスで定義してsuper()で呼び出して引数書くようにするともっと減らせるよ
 	
 	public MyOval(int xpt, int ypt, int wpt, int hpt) {
 		super(xpt, ypt, wpt, hpt);
-	}
-	
-	public MyOval(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
-		super(xpt, ypt, wpt, hpt, lc, fc);
 	}
 	
 	public void setRegion() {
@@ -45,6 +40,8 @@ public class MyOval extends MyDrawing
 		int w = getW();
 		int h = getH();
 		int l = getLines();
+		Color fc = getFillColor();
+		Color lc = getLineColor();
 		
 		
 		//高さや横幅が負のときのための処理
@@ -69,9 +66,13 @@ public class MyOval extends MyDrawing
 			g2.setStroke(new BasicStroke(getLineWidth()));
 			
 		}
-		g2.setColor(getFillColor());
+		
+		Color fillColorWithAlpha = new Color(fc.getRed(), fc.getGreen(), fc.getBlue(), getFillAlpha());
+		Color lineColorWithAlpha = new Color(lc.getRed(), lc.getGreen(), lc.getBlue(), getLineAlpha());
+		
+		g2.setColor(fillColorWithAlpha);
 		g2.fillOval(x, y, w, h);
-		g2.setColor(getLineColor());
+		g2.setColor(lineColorWithAlpha);
 		if (l > 1) {
 		    for (int i = 0; i < l; i++) {
 		        int move = i * 2;

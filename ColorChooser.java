@@ -21,7 +21,7 @@ public class ColorChooser extends JColorChooser{
     class ColorListener implements ChangeListener{
     	 public void stateChanged(ChangeEvent e) {
     		 color = getColor();
-    		if(mediator.selectedDrawing != null) {
+    		if(mediator.selectedDrawings != null) {
     			if(type == "LINE") {
     				mediator.setLineColor(color);
     				mediator.repaint();

@@ -18,7 +18,7 @@ public class SaveAndLoadItem extends JMenuItem{
     
     class SaveAndLoadListener implements ActionListener{
     	 public void actionPerformed(ActionEvent e) {
-    		if(mediator.selectedDrawing != null) {
+    		if(mediator.selectedDrawings != null) {
     			if(type == "SAVE") {
     				mediator.saveData();
     			}

@@ -12,7 +12,15 @@ public class StateManager
 	}
 	
 	public void setState(State state) {
-		//現在のstateを更新する：引数にStateの子クラスRectStateを取った場合、四角形描画用のstateに更新される
+		if(this.state instanceof FreePolylineState) {
+			FreePolylineState freePolylineState = (FreePolylineState) this.state;
+			freePolylineState.freePolyline.setStartPoint(null);
+			freePolylineState.freePolyline.setCurrentPoint(null);
+			if(freePolylineState.freePolyline.vertices.size() == 1) {
+				mediator.removeDrawing(freePolylineState.freePolyline);
+			}
+			mediator.canvas.repaint();
+		}
 		this.state = state;
 	}
 	

@@ -6,7 +6,8 @@ import java.io.Serializable;
 public class MyDrawing implements Cloneable, Serializable
 {
 	int x, y, w, h; //X座標 Y座標 幅 高さ
-	private Color lineColor, fillColor; //線の色 塗りの色
+	private Color fillColor, lineColor; //線の色 塗りの色
+	private int fillAlpha, lineAlpha;
 	private int lineWidth; //線の太さ
 	private boolean isDashed = false; //線の種類
 	private boolean isShadowed = false; //ドロップシャドウ
@@ -20,13 +21,12 @@ public class MyDrawing implements Cloneable, Serializable
 	public MyDrawing(int x, int y, int w, int h) {
 		setLocation(x, y);
 		setSize(w, h);
-		setColor(Color.black,Color.white);
+		setFillColor(Color.white);
+		setLineColor(Color.black);
+		setFillAlpha(255);
+		setLineAlpha(255);
 	}
-	
-	public MyDrawing(int x, int y, int w, int h, Color lc, Color fc) {
-		this(x, y, w, h);
-		setColor(lc, fc);
-	}
+
 	
 	public void draw(Graphics g) {
 		//選択状態を表す四角形を描く
@@ -77,12 +77,20 @@ public class MyDrawing implements Cloneable, Serializable
 		this.fillColor = fillColor;
 	}
 	
+	public void setFillColor(Color fillColor) {
+		this.fillColor = fillColor;
+	}
+	
 	public void setLineColor(Color lineColor) {
 		this.lineColor = lineColor;
 	}
 	
-	public void setFillColor(Color fillColor) {
-		this.fillColor = fillColor;
+	public void setFillAlpha(int fillAlpha) {
+		this.fillAlpha = fillAlpha;
+	}
+	
+	public void setLineAlpha(int lineAlpha) {
+		this.lineAlpha = lineAlpha;
 	}
 	
 	public void setLineWidth(int lineWidth) {
@@ -142,14 +150,22 @@ public class MyDrawing implements Cloneable, Serializable
 		return h;
 	}
 	
+	public Color getFillColor() {
+		//オブジェクトの塗りの色を取得する処理を書く
+		return fillColor;
+	}
+	
 	public Color getLineColor(){
 		//オブジェクトの線の色を取得する処理を書く
 		return lineColor;
 	}
 	
-	public Color getFillColor() {
-		//オブジェクトの塗りの色を取得する処理を書く
-		return fillColor;
+	public int getFillAlpha() {
+		return fillAlpha;
+	}
+	
+	public int getLineAlpha() {
+		return lineAlpha;
 	}
 	
 	public int getLineWidth() {

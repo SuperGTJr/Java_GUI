@@ -19,11 +19,11 @@ public class SelectState extends State{
 	public void mouseDown(int x, int y) {
 		MyDrawing front = stateManager.mediator.getFront(x, y);
 		if(front != null) {
-			if(stateManager.mediator.getSelectedDrawing().contains(front)) {
+			if(stateManager.mediator.getSelectedDrawings().contains(front)) {
 				x0 = x;
 				y0 = y;
 				//応急処置：なぜかisSelected=falseになってしまうので……
-				for(Enumeration<MyDrawing> e = stateManager.mediator.selectedDrawing.elements(); e.hasMoreElements();) {
+				for(Enumeration<MyDrawing> e = stateManager.mediator.selectedDrawings.elements(); e.hasMoreElements();) {
 					MyDrawing d = e.nextElement();
 					d.setSelected(true);
 				}	
@@ -37,7 +37,8 @@ public class SelectState extends State{
 			y0_a = y;
 			area = new MyRectangle(x, y, 0, 0);
 			area.setDashed(true);
-			area.setFillColor(new Color(0,0,0,0));
+			area.setFillColor(new Color(0,0,0));
+			area.setFillAlpha(0);
 			stateManager.mediator.addDrawing(area);
 			multiFlag = true;
 		}
@@ -47,7 +48,6 @@ public class SelectState extends State{
 		if(multiFlag) {
 			stateManager.mediator.setSelectedByArea(area);
 			stateManager.mediator.removeDrawing(area);
-//			System.out.println(stateManager.mediator.selectedDrawing);
 			multiFlag = false;
 		}
 	}

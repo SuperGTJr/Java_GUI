@@ -19,8 +19,10 @@ public class DashCheck extends JCheckBox{
 			int state = e.getStateChange();
 			if(state==ItemEvent.SELECTED) {
 				mediator.setDashed(true);
+				mediator.repaint();
 			}else {
 				mediator.setDashed(false);
+				mediator.repaint();
 			}
 		}
 	}

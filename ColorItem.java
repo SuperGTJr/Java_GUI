@@ -23,13 +23,13 @@ public class ColorItem extends JMenuItem{
     
     class ColorListener implements ActionListener{
     	 public void actionPerformed(ActionEvent e) {
-    		if(mediator.selectedDrawing != null) {
-    			if(type == "LINE") {
-    				mediator.setLineColor(color);
+    		if(mediator.selectedDrawings != null) {
+    			if(type == "FILL") {
+    				mediator.setFillColor(color);
     				mediator.repaint();
     			}
-    			else if(type == "FILL") {
-    				mediator.setFillColor(color);
+    			else if(type == "LINE") {
+    				mediator.setLineColor(color);
     				mediator.repaint();
     			}
     		}

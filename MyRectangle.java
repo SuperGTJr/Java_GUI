@@ -10,10 +10,6 @@ public class MyRectangle extends MyDrawing
 		super(xpt, ypt, wpt, hpt);
 	}
 	
-	public MyRectangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
-		super(xpt, ypt, wpt, hpt, lc, fc);
-	}
-	
 	public void setRegion() {
 		int x = getX();
 		int y = getY();
@@ -44,6 +40,9 @@ public class MyRectangle extends MyDrawing
 		int w = getW();
 		int h = getH();
 		int l = getLines();
+		Color fc = getFillColor();
+		Color lc = getLineColor();
+		
 		
 		//高さや横幅が負のときのための処理
 		if(w < 0) {
@@ -69,10 +68,12 @@ public class MyRectangle extends MyDrawing
 			
 		}
 		
+		Color fillColorWithAlpha = new Color(fc.getRed(), fc.getGreen(), fc.getBlue(), getFillAlpha());
+		Color lineColorWithAlpha = new Color(lc.getRed(), lc.getGreen(), lc.getBlue(), getLineAlpha());
 		
-		g2.setColor(getFillColor());
+		g2.setColor(fillColorWithAlpha);
 		g2.fillRect(x, y, w, h);
-		g2.setColor(getLineColor());
+		g2.setColor(lineColorWithAlpha);
 		if (l > 1) {
 		    for (int i = 0; i < l; i++) {
 		        int move = i * 2;

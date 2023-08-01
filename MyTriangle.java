@@ -11,10 +11,6 @@ public class MyTriangle extends MyDrawing
 		super(xpt, ypt, wpt, hpt);
 	}
 	
-	public MyTriangle(int xpt, int ypt, int wpt, int hpt, Color lc, Color fc) {
-		super(xpt, ypt, wpt, hpt, lc, fc);
-	}
-	
 	public void setRegion() {
 		int x = getX();
 		int y = getY();
@@ -43,11 +39,15 @@ public class MyTriangle extends MyDrawing
 		int y = getY();
 		int w = getW()/2;
 		int h = getH()/2;
+		int l = getLines();
+		Color fc = getFillColor();
+		Color lc = getLineColor();
 		
 		int[] xpts = new int[numV];
 		int[] ypts = new int[numV];
 		int centerX = x + w;
 		int centerY = y + h;
+		
 		for(int i=0; i<numV; i++) {
 			double angle = 2 * Math.PI * i / numV;
 			xpts[i] = centerX - (int)(w * Math.cos(angle));
@@ -60,9 +60,9 @@ public class MyTriangle extends MyDrawing
 			if(getShadowed()) {
 				int[] sxpts = new int[numV];
 				int[] sypts = new int[numV];
-				for(int j=0; j<numV; j++) {
-					sxpts[j] = xpts[j] + 3;
-					sypts[j] = ypts[j] + 3;
+				for(int i=0; i<numV; i++) {
+					sxpts[i] = xpts[i] + 3;
+					sypts[i] = ypts[i] + 3;
 				}
 				g2.setColor(Color.black);
 				g2.fillPolygon(sxpts, sypts, numV);
@@ -75,9 +75,27 @@ public class MyTriangle extends MyDrawing
 			g2.setStroke(new BasicStroke(getLineWidth()));
 			
 		}
-		g2.setColor(getFillColor());
+		
+		Color fillColorWithAlpha = new Color(fc.getRed(), fc.getGreen(), fc.getBlue(), getFillAlpha());
+		Color lineColorWithAlpha = new Color(lc.getRed(), lc.getGreen(), lc.getBlue(), getLineAlpha());
+		
+		g2.setColor(fillColorWithAlpha);
 		g2.fillPolygon(xpts, ypts, numV);
-		g2.setColor(getLineColor());
-		g2.drawPolygon(xpts, ypts, numV);
+		g2.setColor(lineColorWithAlpha);
+		if (l > 1) {
+		    for (int i = 0; i < l; i++) {
+		        int shrink = i * 4;
+		        int[] lxpts = new int[numV];
+				int[] lypts = new int[numV];
+				for(int j=0; j<numV; j++) {
+					double angle = 2 * Math.PI * j / numV;
+					lxpts[j] = centerX - (int)((w-shrink) * Math.cos(angle));
+					lypts[j] = centerY - (int)((h-shrink) * Math.sin(angle));
+				}
+				g2.drawPolygon(lxpts, lypts, numV);
+		    }
+		} else {
+			g2.drawPolygon(xpts, ypts, numV);
+		}
 	}
 }

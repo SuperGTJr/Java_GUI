@@ -28,6 +28,7 @@ public class MyApplication extends JFrame{
 		
 		JPanel jp = new JPanel();
 		jp.setLayout(new FlowLayout());
+//		jp.setLayout(new BoxLayout(jp, BoxLayout.X_AXIS));
 		
 		stateManager = new StateManager(canvas.mediator);
 		stateManager.setState(new RectState(stateManager));
@@ -40,6 +41,8 @@ public class MyApplication extends JFrame{
 		jp.add(triangleButton);
 		HendecagonalButton hendecagonalButton = new HendecagonalButton(stateManager);
 		jp.add(hendecagonalButton);
+		FreePolylineButton freePolylineButton = new FreePolylineButton(stateManager);
+		jp.add(freePolylineButton);
 		SelectButton selectButton = new SelectButton(stateManager);
 		jp.add(selectButton);
 		
@@ -52,25 +55,22 @@ public class MyApplication extends JFrame{
 		fileMenu = new JMenu("File");
 		SaveAndLoadItem saveItem = new SaveAndLoadItem(canvas.mediator, "Save", "SAVE");
 		SaveAndLoadItem loadItem = new SaveAndLoadItem(canvas.mediator, "Load", "LOAD");
+		ImageItem imageItem = new ImageItem(canvas.mediator, "Load Image");
 		
 		fileMenu.add(saveItem);
 		fileMenu.add(loadItem);
+		fileMenu.add(imageItem);
 		
 		menuBar.add(fileMenu);
 		
 		
 		//Color
 		colorMenu = new JMenu("Color");
-		JMenu colorLine = new JMenu("Line");
-		JMenu otherLineColor = new JMenu("Other");
 		JMenu colorFill = new JMenu("Fill");
 		JMenu otherFillColor = new JMenu("Other");
-		
-		ColorItem lineRedItem = new ColorItem(canvas.mediator, Color.red, "red", "LINE");
-		ColorItem lineBlueItem = new ColorItem(canvas.mediator, Color.blue, "blue", "LINE");
-		ColorItem lineGreenItem = new ColorItem(canvas.mediator, Color.green, "green", "LINE");
-		ColorChooser lineChooser = new ColorChooser(canvas.mediator, "LINE");
-		otherLineColor.add(lineChooser);
+		JMenu colorLine = new JMenu("Line");
+		JMenu otherLineColor = new JMenu("Other");
+		JMenu spuitMenu = new JMenu("Spuit");
 		
 		ColorItem fillRedItem = new ColorItem(canvas.mediator, Color.red, "red", "FILL");
 		ColorItem fillBlueItem = new ColorItem(canvas.mediator, Color.blue, "blue", "FILL");
@@ -78,18 +78,31 @@ public class MyApplication extends JFrame{
 		ColorChooser fillChooser = new ColorChooser(canvas.mediator, "FILL");
 		otherFillColor.add(fillChooser);
 		
-		colorLine.add(lineRedItem);
-		colorLine.add(lineBlueItem);
-		colorLine.add(lineGreenItem);
-		colorLine.add(otherLineColor);
+		ColorItem lineRedItem = new ColorItem(canvas.mediator, Color.red, "red", "LINE");
+		ColorItem lineBlueItem = new ColorItem(canvas.mediator, Color.blue, "blue", "LINE");
+		ColorItem lineGreenItem = new ColorItem(canvas.mediator, Color.green, "green", "LINE");
+		ColorChooser lineChooser = new ColorChooser(canvas.mediator, "LINE");
+		otherLineColor.add(lineChooser);
+		
+		SpuitItem fillSpuit = new SpuitItem(stateManager, "Fill", "FILL");
+		SpuitItem lineSpuit = new SpuitItem(stateManager, "Line", "LINE");
 		
 		colorFill.add(fillRedItem);
 		colorFill.add(fillBlueItem);
 		colorFill.add(fillGreenItem);
 		colorFill.add(otherFillColor);
 		
-		colorMenu.add(colorLine);
+		colorLine.add(lineRedItem);
+		colorLine.add(lineBlueItem);
+		colorLine.add(lineGreenItem);
+		colorLine.add(otherLineColor);
+		
+		spuitMenu.add(fillSpuit);
+		spuitMenu.add(lineSpuit);
+		
 		colorMenu.add(colorFill);
+		colorMenu.add(colorLine);
+		colorMenu.add(spuitMenu);
 		
 		menuBar.add(colorMenu);
 		
@@ -110,6 +123,16 @@ public class MyApplication extends JFrame{
 		jp.add(lineWidthLabel);
 		LineWidthSpinner lineWidthSpinner = new LineWidthSpinner(canvas.mediator);
 		jp.add(lineWidthSpinner);
+		
+		JLabel fillAlphaLabel = new JLabel("fillAlpha:");
+		jp.add(fillAlphaLabel);
+		AlphaSpinner fillAlphaSpinner = new AlphaSpinner(canvas.mediator, "FILL");
+		jp.add(fillAlphaSpinner);
+		
+		JLabel lineAlphaLabel = new JLabel("lineAlpha:");
+		jp.add(lineAlphaLabel);
+		AlphaSpinner lineAlphaSpinner = new AlphaSpinner(canvas.mediator, "LINE");
+		jp.add(lineAlphaSpinner);
 		
 //Panelで機能を分けられたら素敵ですね
 //		JPanel shapePanel = new JPanel();
@@ -164,7 +187,7 @@ public class MyApplication extends JFrame{
 	}
 	
 	public Dimension getPreferredSize() {
-		return new Dimension(1000, 800);
+		return new Dimension(1200, 850);
 	}
 	
 	public static void main(String args[]) {
